@@ -1,4 +1,4 @@
-package Arrays_Java.Arrays;
+package Arrays;
 
 public class Demo {
 

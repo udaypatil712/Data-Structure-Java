@@ -1,5 +1,4 @@
-package Arrays_Java.Arrays;
-
+ package Arrays;
 
 import java.util.Arrays;
 

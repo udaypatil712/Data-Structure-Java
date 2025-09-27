@@ -1,5 +1,4 @@
-package Arrays_Java.Arrays;
-
+package Arrays;
 
 public class Cookies {
     public static void main(String[] args) {

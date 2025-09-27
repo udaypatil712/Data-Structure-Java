@@ -1,4 +1,4 @@
-package Arrays_Java.Basic_Problems;
+package Basic_Problems;
 
 public class Demo {
     public static void main(String[] args) {

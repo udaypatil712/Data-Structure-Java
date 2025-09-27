@@ -1,4 +1,4 @@
-package Arrays_Java.Arrays;
+package Arrays;
 
 public class DuplicatePrint {
     public static void main(String[] args) {
