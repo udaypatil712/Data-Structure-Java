@@ -7,7 +7,7 @@ public class SumArrayOfMini {
         int[] arr = { 3, 1, 2 };
 
         // System.out.println(bruteForceApproach(arr));
-        System.out.println(optimalSolution(arr));
+        System.out.println(minSum(arr));
     }
 
     public static int bruteForceApproach(int[] arr) {
@@ -26,15 +26,15 @@ public class SumArrayOfMini {
         return sum;
     }
 
-    public static int optimalSolution(int[] arr) {
+    public static int minSum(int[] arr) {  // this is little similar previous smallest element
         int[] right = NGE(arr);
         int[] left = PSE(arr);
         int sum = 0;
-
+    
         for (int i = 0; i < arr.length; i++) {
             int right1 = right[i] - i;
-            int left1 =   i - left[i];
-            sum += ((long) arr[i] * left1 * right1) % ((Math.pow(10, 9)) + 7 );
+            int left1 =   i - left[i];              // use mod is minimize the answer that's why use mod
+            sum += ((long) arr[i] * left1 * right1) % ((Math.pow(10, 9)) + 7 );  // for safe side you can use mod because of another test cases you need mod
         }
         return (int)sum;
     }
@@ -45,7 +45,7 @@ public class SumArrayOfMini {
         int[] right = new int[arr.length];
         int n = arr.length;
         for (int i = arr.length - 1; i >= 0; i--) {
-            while (!st.empty() && arr[st.peek()] >= arr[i]) {
+            while (!st.empty() && arr[st.peek()] >= arr[i]) {   // this condition arr[top] >= arr[i]
                 st.pop();
             }
             right[i] = st.empty() ? n  : st.peek();
@@ -60,7 +60,7 @@ public class SumArrayOfMini {
         int[] left = new int[arr.length];
 
         for (int i = 0; i < arr.length; i++) {
-            if (!st.empty() && arr[st.peek()] > arr[i]) {
+            if (!st.empty() && arr[st.peek()] > arr[i]) { // this condition arr[top] >= arr[i]
                 st.pop();
             }
             left[i] = st.empty() ? -1 : st.peek();
