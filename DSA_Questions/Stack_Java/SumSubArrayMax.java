@@ -10,7 +10,7 @@ public class SumSubArrayMax {
 
     public static int maxSum(int[] arr) {  // this is little bit similar like next greater element 
         int[] right = NGE(arr);
-        int[] left = PSE(arr);
+        int[] left = PGE(arr);
         int sum = 0;
         long mod = (long)1e9 + 7;
 
@@ -37,7 +37,7 @@ public class SumSubArrayMax {
 
     }
 
-    public static int[] PSE(int[] arr) {
+    public static int[] PGE(int[] arr) {
         int[] left = new int[arr.length];
         Stack<Integer> st = new Stack<>();
 

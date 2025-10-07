@@ -27,7 +27,7 @@ public class SumArrayOfMini {
     }
 
     public static int minSum(int[] arr) {  // this is little similar previous smallest element
-        int[] right = NGE(arr);
+        int[] right = NSE(arr);
         int[] left = PSE(arr);
         int sum = 0;
     
@@ -40,7 +40,7 @@ public class SumArrayOfMini {
     }
 
     // next greater element
-    public static int[] NGE(int[] arr) {
+    public static int[] NSE(int[] arr) {
         Stack<Integer> st = new Stack<>();
         int[] right = new int[arr.length];
         int n = arr.length;
@@ -69,3 +69,4 @@ public class SumArrayOfMini {
         return left;
     }
 }
+ 
