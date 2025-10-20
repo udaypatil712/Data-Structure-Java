@@ -13,6 +13,7 @@ public class AsteroidCollision {
         ArrayList<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < arr.length; i++) {
+            
             if (arr[i] < 0) {  // first check here element is negative go inside 
                 int num = Math.abs(arr[i]);    // mod of that neagtive element
                 // int top = list.get(list.size() - 1);  // get top element 
