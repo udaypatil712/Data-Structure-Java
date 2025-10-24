@@ -80,7 +80,7 @@ public class Main {
         // temp = temp.next;
         // }
 
-        head = midElementLL(head);
+        // head = midElementLL(head);
         Node temp = head;
         while (temp != null) {
             System.out.print(temp.data + " ");
