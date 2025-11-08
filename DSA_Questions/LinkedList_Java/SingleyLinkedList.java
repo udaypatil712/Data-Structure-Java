@@ -1,8 +1,10 @@
 package LinkedList_Java;
 
+import java.util.*;
+
 public class SingleyLinkedList {
     public static void main(String[] args) {
-        int[] arr = { 1, 2, 1 };
+        int[] arr = {5,2,13,3,8};
 
         Node head = convertArr2LL(arr);
 
@@ -92,9 +94,39 @@ public class SingleyLinkedList {
         // temp = temp.next;
         // }
 
-        boolean ans = checkPalindrome(head);
-        System.out.println(ans);
+        // boolean ans = checkPalindrome(head);
+        // System.out.println(ans);
 
+        // Node temp = add1InLL(head, 10);
+        // while (temp != null) {
+        // System.out.println(temp.data);
+        // temp = temp.next;
+        // }
+
+        // Node temp = add1InLLRec(head);
+        // while (temp != null) {
+        // System.out.println(temp.data);
+        // temp = temp.next;
+        // }
+
+        // Node temp = middleElementOfLL(head);
+        // while (temp != null) {
+        // System.out.println(temp.data);
+        // temp = temp.next;
+        // }
+
+        // Node temp = deleteMiddleNode(head);
+        // while (temp != null) {
+        //     System.out.println(temp.data);
+        //     temp = temp.next;
+        // }
+    
+        Node temp = removeNodes(head);
+        while (temp != null) {
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
+    
     }
 
     public static Node convertArr2LL(int[] arr) {
@@ -404,4 +436,109 @@ public class SingleyLinkedList {
 
     }
 
+    public static Node add1InLL(Node head, int val) {
+        if (head == null) {
+            return head;
+        }
+        Node reverse = reverseLL(head);
+        Node temp = reverse;
+
+        int carry = val;
+
+        while (temp != null) {
+            int sum = temp.data + carry;
+            temp.data = sum % 10;
+            carry = sum / 10;
+
+            if (carry == 0) {
+                break;
+            }
+            if (temp.next == null) {
+                break;
+            }
+            temp = temp.next;
+        }
+        if (carry > 0) {
+            temp.next = new Node(carry);
+        }
+        head = reverseLL(reverse);
+        return head;
+
+    }
+
+    public static Node add1InLLRec(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        int carry = 1;
+        Node newNode = add1InLLRec(head.next);
+        int sum = newNode.data + carry;
+        if (sum > 9) {
+            newNode.data = sum % 10;
+            carry = sum / 10;
+        } else {
+            newNode.data = sum % 10;
+            carry = 0;
+        }
+
+        return newNode;
+
+    }
+
+    public static Node middleElementOfLL(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Node slow = head;
+        Node fast = head.next;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow.next;
+    }
+
+    public static Node deleteMiddleNode(Node head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+        Node slow = head;
+        Node fast = head.next;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow.next = slow.next.next;
+
+        return head;
+
+    }
+
+    public static Node removeNodes(Node head){
+        if(head == null || head.next == null) {
+            return head;
+        }
+        Node temp = head;
+        Stack<Node> st = new Stack<>();
+        while (temp != null) {
+            while (!st.empty() && st.peek().data <= temp.data) {
+                st.pop();
+            }
+            st.push(temp);
+            temp = temp.next;
+        }
+        Node newHead = null;
+
+        while (!st.isEmpty()) {
+            Node node = st.pop();
+            node.next = newHead;
+            newHead = node;
+        }
+         
+        return newHead;
+    }
+
+        
 }
