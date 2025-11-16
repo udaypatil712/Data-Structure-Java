@@ -4,7 +4,7 @@ import java.util.*;
 
 public class SingleyLinkedList {
     public static void main(String[] args) {
-        int[] arr = {5,2,13,3,8};
+        int[] arr = { 0, 3, 1, 0, 4, 5, 2, 0 };
 
         Node head = convertArr2LL(arr);
 
@@ -117,16 +117,34 @@ public class SingleyLinkedList {
 
         // Node temp = deleteMiddleNode(head);
         // while (temp != null) {
-        //     System.out.println(temp.data);
-        //     temp = temp.next;
+        // System.out.println(temp.data);
+        // temp = temp.next;
         // }
-    
-        Node temp = removeNodes(head);
+
+        // Node temp = removeNodes(head);
+        // while (temp != null) {
+        // System.out.println(temp.data);
+        // temp = temp.next;
+        // }
+
+        // Node temp = reveresePositionNodes(head, 3, 5);
+        // while (temp != null) {
+        // System.out.println(temp.data);
+        // temp = temp.next;
+        // }
+
+        // Node temp = removeLLElements(head, 6);
+        // while (temp != null) {
+        // System.out.println(temp.data);
+        // temp = temp.next;
+        // }
+
+        Node temp = mergeSumBetweenZero(head);
         while (temp != null) {
             System.out.println(temp.data);
             temp = temp.next;
         }
-    
+
     }
 
     public static Node convertArr2LL(int[] arr) {
@@ -516,8 +534,8 @@ public class SingleyLinkedList {
 
     }
 
-    public static Node removeNodes(Node head){
-        if(head == null || head.next == null) {
+    public static Node removeNodes(Node head) {
+        if (head == null || head.next == null) {
             return head;
         }
         Node temp = head;
@@ -536,9 +554,86 @@ public class SingleyLinkedList {
             node.next = newHead;
             newHead = node;
         }
-         
+
         return newHead;
     }
 
-        
+    public static Node reveresePositionNodes(Node head, int left, int right) {
+        if (head == null || left == right) {
+            return head;
+        }
+
+        Node temp = head;
+
+        for (int i = 1; i < left - 1; i++) {
+            temp = temp.next;
+        }
+        Node prevLeft = temp;
+
+        Node dummy = new Node(0);
+        Node dt = dummy;
+
+        for (int i = left; i <= right; i++) {
+            dt.next = new Node(temp.next.data);
+            dt = dt.next;
+            temp = temp.next;
+        }
+        Node rightnext = temp.next;
+
+        Node revLL = reverseLL(dummy.next);
+        Node trev = revLL;
+        prevLeft.next = revLL;
+        while (trev.next != null) {
+            trev = trev.next;
+        }
+        trev.next = rightnext;
+
+        return head;
+    }
+
+    public static Node removeLLElements(Node head, int val) {
+
+        Node dummy = new Node(0, head);
+        Node curr = dummy;
+
+        while (curr.next != null) {
+            if (curr.next.data == val) {
+                curr.next = curr.next.next;
+            } else {
+                curr = curr.next;
+            }
+        }
+        return dummy.next;
+
+    }
+
+    public static Node mergeSumBetweenZero(Node head) {
+
+        Node dummy = new Node(0);
+        Node tail = dummy; // final list tail
+
+        Node curr = head;
+
+        while (curr != null) {
+
+            int sum = 0;
+
+            // skip the zero at the start
+            curr = curr.next;
+
+            // sum until next zero
+            while (curr != null && curr.data != 0) {
+                sum += curr.data;
+                curr = curr.next;
+            }
+
+            if (sum != 0) {
+                tail.next = new Node(sum);
+                tail = tail.next;
+            }
+        }
+
+        return dummy.next;
+    }
+
 }
